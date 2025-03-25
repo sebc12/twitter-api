@@ -16,4 +16,10 @@ class Comment extends Model
     {
         return $this->morphMany(Like::class, 'likeable');
     }
+
+    // Comment.php model
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
