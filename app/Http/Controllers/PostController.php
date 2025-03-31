@@ -11,7 +11,14 @@ class PostController extends Controller
 {
     public function index()
     {
-        return Post::with(['user', 'comments.user', 'comments', 'likes'])->latest()->get();
+        return Post::with([
+            'user',
+            'comments.user',
+            'comments.likes', // Tilføj likes for kommentarer
+            'comments.likes.user', // Tilføj bruger, der har liket en kommentar
+            'likes',
+            'likes.user'
+        ])->latest()->get();
     }
 
 

@@ -20,8 +20,13 @@ class CommentController extends Controller
             'content' => 'required|string|max:280',
         ]);
 
+        $userId = Auth::id();
+        if (!$userId) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
         $comment = Comment::create([
-            'user_id' => Auth::id(),
+            'user_id' => $userId,
             'post_id' => $postId,
             'content' => $validated['content'],
         ]);
